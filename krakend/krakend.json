@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "port": 8080,
+  "endpoints": [
+    {
+      "endpoint": "/api/dados",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {
+        "qos/ratelimit/router": {
+          "max_rate": 2,
+          "client_max_rate": 2,
+          "strategy": "ip"
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "host": [
+            "http://php-app:80"
+          ]
+        }
+      ]
+    }
+  ]
+}

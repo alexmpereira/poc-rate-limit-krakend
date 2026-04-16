@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  php-app:
+    build:
+      context: ./php
+    ports:
+      - "8080:80"
+
+  krakend:
+    image: devopsfaith/krakend:latest
+    volumes:
+      - ./krakend/krakend.json:/etc/krakend/krakend.json
+    ports:
+      - "8000:8080"
+    depends_on:
+      - php-app
